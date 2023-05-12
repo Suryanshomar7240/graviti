@@ -12,7 +12,8 @@ const Map = ({response}) => {
     lng: -122.4194,
   });
 
-  const mapContainerStyle={
+  const [directions,setDirections]=useState(null);
+  const mapContainerStyle=  {
     width: "100%",
     height: "100%",
   };
@@ -20,6 +21,7 @@ const Map = ({response}) => {
   useEffect(() => {
     console.log("in map");
     console.log(response);
+    setDirections(response);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -36,7 +38,7 @@ const Map = ({response}) => {
     }
 
 
-  }, []);
+  }, [response]);
 
   return (
     <>
@@ -49,10 +51,7 @@ const Map = ({response}) => {
           zoom={5}
         >
           <Marker position={CurrentLocation} />
-          {/* {response && <DirectionsRenderer options={{
-            directions:response,
-            suppressMarkers:true
-          }} />} */}
+          {directions && <DirectionsRenderer directions={directions} />}
         </GoogleMap>
       </LoadScript>
     </>

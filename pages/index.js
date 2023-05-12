@@ -42,15 +42,15 @@ const Homepage = () => {
         {
           origin:origin,
           destination:destination,
-          travelMode: google.maps.TravelMode.DRIVING
+          travelMode: google.maps.TravelMode.BICYCLING
         },
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
             setResponse(result);
-            ReactDOM.render(
-              <Map response={response}/>,document.getElementsByClassName(styles.map)[0]);
+            console.log(response);
+            // ReactDOM.render(<Map response={response}/>,document.getElementsByClassName(styles.map)[0])
           } else {
-            console.error(`Directions request failed due to ${status}`);
+            console.error(`Directions request failed due to ${status}`);  
           }
         }
       );
@@ -82,7 +82,6 @@ const Homepage = () => {
                   <div className={styles.LocationText}>Stops</div>
                   <div className={styles.locationStops}>
                     {stops.map((item, idx) =>{
-                      console.log(idx);
                       return <LocationSearch key={idx} item={item}/>;
                     })}
                   </div>
