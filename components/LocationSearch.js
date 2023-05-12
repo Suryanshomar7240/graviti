@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styles from '../styles/LocationSearch.module.css';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-google-autocomplete";
+import PlacesAutocomplete from "react-google-autocomplete";
 
 const LocationSearch = ({onSelect}) => {
 
@@ -14,7 +11,6 @@ const LocationSearch = ({onSelect}) => {
       onPlaceSelected={(place)=>{
         onSelect(place["formatted_address"]);
       }}
-
     />
   );
 };

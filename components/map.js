@@ -50,8 +50,12 @@ const Map = ({response}) => {
           center={CurrentLocation}
           zoom={5}
         >
-          <Marker position={CurrentLocation} />
-          {directions && <DirectionsRenderer directions={directions} />}
+          {directions && (
+          <DirectionsRenderer
+            directions={directions}
+          />
+        )}
+
         </GoogleMap>
       </LoadScript>
     </>
