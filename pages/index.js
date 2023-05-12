@@ -42,7 +42,7 @@ const Homepage = () => {
         {
           origin:origin,
           destination:destination,
-          travelMode: google.maps.TravelMode.BICYCLING
+          travelMode: google.maps.TravelMode.DRIVING
         },
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
