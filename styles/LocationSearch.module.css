@@ -1,0 +1,10 @@
+.searchBar{
+    box-sizing: border-box;
+    width: clamp(200px,18vw,350px);
+    height: 45px;
+    padding: 5px;
+    background: #FFFFFF;
+    border: 1px solid #DCDDEC;
+    border-radius: 6px;
+    margin-bottom: 0.3vh;
+}

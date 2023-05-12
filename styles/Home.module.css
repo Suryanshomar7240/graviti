@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600;700&family=Rubik&family=Work+Sans&display=swap");
+.homepage {
+  width: 100vw;
+  margin: 0%;
+  padding: 0%;
+}
+.header {
+  background-color: white;
+  height: 10vh;
+  padding-left: 4vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+.homeContent {
+  display: flex;
+  justify-content: space-around;
+  box-sizing: border-box;
+  width: 95vw;
+  margin: auto;
+  min-height: 80vh;
+  padding-top: 5vh;
+}
+.locationSetter {
+  padding-top: 5vh;
+  width: 35vw;
+  /* background-color: #1B31A8; */
+  box-sizing: border-box;
+}
+.map {
+  width: 39vw;
+  box-sizing: border-box;
+}
+
+.tagLine {
+  font-family: "Work Sans";
+  font-style: normal;
+  padding-top: 5vh;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  text-align: center;
+  width: 100vw;
+  color: #1b31a8;
+}
+
+.locationSetter {
+  display: flex;
+  flex-direction: column;
+}
+
+.LocationText {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5vh;
+}
+
+.loctionSrc,
+.LocationStop,
+.LocationDest {
+  padding-bottom: 3vh;
+}
+
+.addStops {
+  padding-top: 5px;
+  width: clamp(200px,18vw,350px);
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+  justify-items: end;
+  cursor: pointer;
+  text-align: right;
+}
+
+.locationStops {
+  display: flex;
+  flex-direction: column;
+}
+
+.homebody {
+  /* background: #E5E5E5; */
+  background-color: #f4f8fa !important;
+}
+
+.displayNone {
+  display: none;
+}
+
+.distanceBox {
+  width: 35vw;
+  border-radius: 8px;
+  border: 1px solid #eaeef0d5;
+}
+
+.distanceWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.calculateButton {
+  background: #1b31a8;
+  border-radius: 32px;
+  width: clamp(100px,10vw,300px);
+  height: clamp(50px,5vw,67px);
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(12px,1vw,20px);
+  line-height: 20px;
+  border: 1px white;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.locationWrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .calculateButto */
+
+.distance {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 120%;
+  color: blue;
+  text-align: right;
+}
+
+.distanceText {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  /* identical to box height, or 24px */
+  border-radius: 0px 0px 8px 8px;
+
+  display: flex;
+  align-items: center;
+}
+
+.caption {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 120%;
+  padding: 20px;
+}
+
+@media screen and (max-width:1000px) {
+  .locationSetter,.distanceBox
+  {
+    width:40vw;
+  }
+  
+}
+@media screen and (max-width: 768px) {
+  .homeContent {
+    flex-direction: column-reverse;
+    padding-top: 0%;
+    width:100vw;
+  }
+  .tagLine {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* disp */
+  }
+  .header {
+    height: 60px;
+  }
+  .locationSetter,.distanceBox{
+    width:80vw;
+    margin:auto;
+  }
+  .distanceBox{
+    margin-bottom: 20px;
+  }
+  .map{
+    width: 100vw;
+    height: 45vh;
+  }
+}
+@media screen and (max-width: 420px){
+  .locationSetter,.distanceBox{
+    width:90vw;
+  }
+}
