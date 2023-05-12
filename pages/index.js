@@ -7,11 +7,16 @@ import Map from "../components/map";
 import LocationSearch from "../components/LocationSearch";
 
 const Homepage = () => {
+  const [origin,setOrigin]=useState(null);
+  const [destination,setDestination]=useState(null);
+  const [stopslocation,setStopsLocation]=useState([]);
   const [stops, setstops] = useState([<LocationSearch />]);
   const [windowWidth, setWidth] = useState(0);
   const handleStops = (e) => {
     setstops((stops) => [...stops, <LocationSearch />]);
   };
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,18 +29,32 @@ const Homepage = () => {
     // Initial window width
     setWidth(window.innerWidth);
 
-    // const locationtags = document.getElementsByClassName(styles.LocationText);
-    // if (window.innerWidth < 768) {
-    //   Array.from(locationtags).forEach((element) => {
-    //     element.classList.add(styles.displayNone);
-    //   });
-    // }
 
-    // Clean up the event listener on component unmount
-    // return () => {
-    //   window.removeEventListener("resize", handleResize);
-    // };
+
   }, []);
+
+  const [response, setResponse] = useState(null);
+
+  const calculateDistance=()=>{
+      const directionsService = new google.maps.DirectionsService();
+      console.log(origin,destination);
+      directionsService.route(
+        {
+          origin:origin,
+          destination:destination,
+          travelMode: google.maps.TravelMode.DRIVING
+        },
+        (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            setResponse(result);
+            ReactDOM.render(
+              <Map response={response}/>,document.getElementsByClassName(styles.map)[0]);
+          } else {
+            console.error(`Directions request failed due to ${status}`);
+          }
+        }
+      );
+    };
 
   return (
     <section className={styles.homepage}>
@@ -57,25 +76,27 @@ const Homepage = () => {
               <div className={styles.locations}>
                 <div className={styles.loctionSrc}>
                   <div className={styles.LocationText}>Origin</div>
-                  <LocationSearch />
+                  <LocationSearch onSelect={(location)=> setOrigin(location)}/>
                 </div>
                 <div className={styles.LocationStop}>
                   <div className={styles.LocationText}>Stops</div>
                   <div className={styles.locationStops}>
-                    {stops.map((item, idx) => item)}
+                    {stops.map((item, idx) =>{
+                      console.log(idx);
+                      return <LocationSearch key={idx} item={item}/>;
+                    })}
                   </div>
                   <div className={styles.addStops} onClick={handleStops}>
-                    {" "}
                     Add another stop <IoMdAddCircleOutline size={20} />
                   </div>
                 </div>
                 <div className={styles.LocationDest}>
                   <div className={styles.LocationText}>Destination</div>
-                  <LocationSearch />
+                  <LocationSearch  onSelect={(location)=> setDestination(location)}/>
                 </div>
               </div>
               <div className={styles.calculate}>
-                <button className={styles.calculateButton}>Calculate</button>
+                <button className={styles.calculateButton} onClick={calculateDistance}>Calculate</button>
               </div>
             </div>
             <div className={styles.distanceBox}>
@@ -90,13 +111,14 @@ const Homepage = () => {
             </div>
           </div>
           <div className={styles.map}>
-            <Map />
+            <Map response={response}/>
           </div>
         </div>
       </div>
     </section>
   );
-};
+
+}
 
 const AddingStop = (props) => {
   return (

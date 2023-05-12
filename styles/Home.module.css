@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600;700&family=Rubik&family=Work+Sans&display=swap");
 .homepage {
   width: 100vw;
+  box-sizing: border-box;
   margin: 0%;
   padding: 0%;
 }
@@ -9,25 +10,27 @@
   height: 10vh;
   padding-left: 4vw;
   padding-top: 1vh;
-  padding-bottom: 1vh;
+  padding-bottom: 1.3vh;
 }
 .homeContent {
   display: flex;
   justify-content: space-around;
   box-sizing: border-box;
   width: 95vw;
-  margin: auto;
+  /* margin: auto; */
   min-height: 80vh;
-  padding-top: 5vh;
+  /* padding-top: 5vh; */
 }
 .locationSetter {
   padding-top: 5vh;
   width: 35vw;
-  /* background-color: #1B31A8; */
   box-sizing: border-box;
 }
 .map {
   width: 39vw;
+  height: 70vh;
+  padding-top: 5vh;
+  /* align-self: center; */
   box-sizing: border-box;
 }
 

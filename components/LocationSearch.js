@@ -5,15 +5,16 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-google-autocomplete";
 
-const LocationSearch = () => {
+const LocationSearch = ({onSelect}) => {
 
   return (
     <PlacesAutocomplete
     className={styles.searchBar}
-      apiKey='AIzaSyAolXVBph__8LXk-JukgnxDUI4LPDQAsxQ'
-      onPlaceSelected={(place) => {
-        console.log(place);
+      apiKey={process.env.NEXT_PUBLIC_API_KEY}
+      onPlaceSelected={(place)=>{
+        onSelect(place["formatted_address"]);
       }}
+
     />
   );
 };
