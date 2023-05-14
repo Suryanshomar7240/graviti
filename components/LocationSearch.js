@@ -9,7 +9,9 @@ const LocationSearch = ({onSelect}) => {
     className={styles.searchBar}
       apiKey={process.env.NEXT_PUBLIC_API_KEY}
       onPlaceSelected={(place)=>{
-        onSelect(place["formatted_address"]);
+        console.log(place);
+        if(place!==undefined)
+          onSelect(place["formatted_address"]);
       }}
     />
   );

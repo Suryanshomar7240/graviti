@@ -4,25 +4,28 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
+  useJsApiLoader,
+  useLoadScript,
 } from "@react-google-maps/api";
 
 const Map = ({response}) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
+  });
+
   const [CurrentLocation, setCurrentLocation] = useState({
     lat: 37.7749,
     lng: -122.4194,
   });
 
-  const [directions,setDirections]=useState(null);
-  const mapContainerStyle=  {
+  const [directions, setDirections] = useState(null);
+  const mapContainerStyle = {
     width: "100%",
     height: "100%",
   };
 
   useEffect(() => {
-    console.log("in map");
-    console.log(response);
-    setDirections(response);
-
+    localStorage.setItem('apiLoaded',isLoaded);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -36,30 +39,28 @@ const Map = ({response}) => {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-
-
+    setDirections(response);
+    console.log(response);  
   }, [response]);
 
-  return (
-    <>
-      <LoadScript
-        googleMapsApiKey={process.env.NEXT_PUBLIC_API_KEY}
-      >
+  if (isLoaded) {
+    return (
+      <>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           center={CurrentLocation}
           zoom={5}
         >
           {directions && (
-          <DirectionsRenderer
-            directions={directions}
-          />
-        )}
-
+            <DirectionsRenderer directions={directions} map={Map} />
+          )}
         </GoogleMap>
-      </LoadScript>
-    </>
-  );
+      </>
+    );
+  }
+  else{
+    <>Loading...</>
+  }
 };
 
 export default Map;
