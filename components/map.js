@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import {
   DirectionsRenderer,
   GoogleMap,
-  LoadScript,
-  Marker,
   useJsApiLoader,
-  useLoadScript,
 } from "@react-google-maps/api";
 
-const Map = ({response}) => {
-  const { isLoaded } = useLoadScript({
+const Map = ({ response }) => {
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
   });
 
@@ -25,7 +22,7 @@ const Map = ({response}) => {
   };
 
   useEffect(() => {
-    localStorage.setItem('apiLoaded',isLoaded);
+    localStorage.setItem("apiLoaded", isLoaded);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -40,7 +37,7 @@ const Map = ({response}) => {
       console.error("Geolocation is not supported by this browser.");
     }
     setDirections(response);
-    console.log(response);  
+    console.log("fromMap",response);
   }, [response]);
 
   if (isLoaded) {
@@ -49,17 +46,14 @@ const Map = ({response}) => {
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           center={CurrentLocation}
-          zoom={5}
+          zoom={8}
         >
-          {directions && (
-            <DirectionsRenderer directions={directions} map={Map} />
-          )}
+          {directions && <DirectionsRenderer directions={directions} />}
         </GoogleMap>
       </>
     );
-  }
-  else{
-    <>Loading...</>
+  } else {
+    <>Loading...</>;
   }
 };
 

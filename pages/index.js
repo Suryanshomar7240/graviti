@@ -11,6 +11,8 @@ const Homepage = () => {
   const [destination, setDestination] = useState(null);
   const [stops, setstops] = useState([null]);
   const [windowWidth, setWidth] = useState(0);
+  const [nopath, setNopath] = useState(false);
+
   const handleStops = (e) => {
     setstops((stops) => [...stops, <LocationSearch />]);
   };
@@ -35,12 +37,12 @@ const Homepage = () => {
   const calculateDistance = () => {
     setDist(null);
     setResponse(null);
+    setNopath(false);
     const directionsService = new google.maps.DirectionsService();
     console.log(origin, destination);
     const wayLocations = [];
     stops.forEach((element) => {
-      if(element!==null)
-      wayLocations.push({ location: element });
+      if (element !== null) wayLocations.push({ location: element });
     });
     directionsService.route(
       {
@@ -60,6 +62,7 @@ const Homepage = () => {
           dist /= 1000;
           setDist(dist + " Kms");
         } else {
+          setNopath(true);
           console.error(`Directions request failed due to ${status}`);
         }
       }
@@ -143,10 +146,18 @@ const Homepage = () => {
               </div>
               <div className={styles.caption}>
                 {origin != null && destination != null ? (
-                  <>
-                    The distance between <b>{origin}</b> and{" "}
-                    <b>{destination}</b> via the seleted route is <b>{dist}</b>
-                  </>
+                  nopath ? (
+                    <>
+                      There is no valid path betweeen <b>{origin}</b> and{" "}
+                      <b>{destination}</b> via the given stops.
+                    </>
+                  ) : (
+                    <>
+                      The distance between <b>{origin}</b> and{" "}
+                      <b>{destination}</b> via the seleted route is{" "}
+                      <b>{dist}</b>
+                    </>
+                  )
                 ) : (
                   <>Enter origin and destination</>
                 )}
