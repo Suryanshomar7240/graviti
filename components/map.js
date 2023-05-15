@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   DirectionsRenderer,
   GoogleMap,
-  useJsApiLoader,
+  // useJsApiLoader,
+  useLoadScript,
 } from "@react-google-maps/api";
+import PlacesAutocomplete from "react-google-autocomplete";
 
 const Map = ({ response }) => {
-  const { isLoaded } = useJsApiLoader({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
   });
 
@@ -37,7 +39,7 @@ const Map = ({ response }) => {
       console.error("Geolocation is not supported by this browser.");
     }
     setDirections(response);
-    console.log("fromMap",response);
+    console.log("fromMap", response);
   }, [response]);
 
   if (isLoaded) {
